@@ -12,7 +12,7 @@
 			"data" => []
 		];
 
-		public function __construct($opts = array()) {
+		public function __construct($opts = array(), $tpl_dir = "/views/") {
 
 			//se no opts der conflito com defaults, vale o do opts, por isso a ordem do merge é importante
 			$this->options = array_merge($this->defaults, $opts);
