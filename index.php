@@ -5,7 +5,7 @@
 
 	use \Slim\Slim;
 	use \Hcode\Page;
-	//use \Hcode\PageAdmin;
+	use \Hcode\PageAdmin;
 	//use \Hcde\Model\User;
 
 	$app = new Slim();
@@ -29,17 +29,17 @@
 
 	});
 
-/*
-	$app->get('admin', function() {
 
-		User::verifyLogin();
+	$app->get('/admin', function() {
+
+		//User::verifyLogin();
 
 		$page = new PageAdmin();
 
 		$page->setTpl("index");
 
 	});
-
+/*
 	$app->get('/admin/login', function() {
 
 		$page = new PagAdmin([
