@@ -1,12 +1,12 @@
 <?php 
 
-	session_star();
+	//session_star();
 	require_once("vendor/autoload.php");
 
 	use \Slim\Slim;
-	use \Hcode\Page;
-	use \Hcode\PageAdmin;
-	use \Hcde\Model\User;
+	//use \Hcode\Page;
+	//use \Hcode\PageAdmin;
+	//use \Hcde\Model\User;
 
 	$app = new Slim();
 
@@ -15,21 +15,21 @@
 
 	$app->get('/', function() {
 
+		
+		$sql = new \Hcode\DB\Sql();
+		$results = $sql->select("SELECT * FROM tb_users");
+		echo json_encode($results);
+		
+		echo "OK";
 
-		//$sql = new \Hcode\DB\Sql();
-		//$results = $sql->select("SELECT * FROM tb_users");
-		//echo json_encode($results);
 
-		//echo "OK";
+		//$page = new Page();
 
-
-		$page = new Page();
-
-		$page->setTpl("index");
+		//$page->setTpl("index");
 
 	});
 
-
+/*
 	$app->get('admin', function() {
 
 		User::verifyLogin();
@@ -65,12 +65,12 @@
 
 		User::logout();
 
-		header("Location: /admin/login")
+		header("Location: /admin/login");
 
 		exit;
 
 	});
-
+*/
 	$app->run();
 
  ?>
