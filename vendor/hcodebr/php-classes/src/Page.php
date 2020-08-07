@@ -16,14 +16,14 @@
 
 		public function __construct($opts = array(), $tpl_dir = "/views/") {
 
-			//se no opts der conflito com defaults, vale o do opts, por isso a ordem do merge é importante
+			//se no opts der conflito com defaults, vale o do opts, por isso a ordem do merge é importante; o primeiro parâmetro sobrescreve o segundo
 			$this->options = array_merge($this->defaults, $opts);
 
 			// config
 			$config = array(
-							"tpl_dir"       => $_SERVER["DOCUMENT_ROOT"] . "/phpudemy/hcodecommerce/views/",
-							"cache_dir"     => $_SERVER["DOCUMENT_ROOT"] . "/phpudemy/hcodecommerce/views-cache/",
-							"debug"         => false // set to false to improve the speed
+				"tpl_dir"       => $_SERVER["DOCUMENT_ROOT"] . "/views/",
+				"cache_dir"     => $_SERVER["DOCUMENT_ROOT"] . "/views-cache/",
+				"debug"         => false // set to false to improve the speed
 						   );
 
 			Tpl::configure( $config );
@@ -31,8 +31,13 @@
 			// create the Tpl object
 			$this->tpl = new Tpl;
 
+			//foreach ($this->options["data"] as $key => $value) {
+			//	$this->tpl->assign($key,$value);
+			//}
 			$this->setData($this->options["data"]);
-
+			
+		
+			//$this->tpl->draw("draw");
 			if ($this->options["header"] === true)  $this->tpl->draw("header");
 
 		}
