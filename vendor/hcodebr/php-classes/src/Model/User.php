@@ -1,8 +1,8 @@
 <?php 
 
 	namespace Hcode\Model;
-	user \Hcdoe\DB\Sql;
-	user \Hcode\Model;
+	use \Hcode\DB\Sql;
+	use \Hcode\Model;
 
 	class User extends Model {
 
@@ -10,9 +10,9 @@
 
 		public static function login($login, $password) {
 
-			$sql = new $Sql();
+			$sql = new Sql();
 
-			$results = $sql->select("SELECT * FROM tb_user WHERE deslogin = :LOGIN", array (":LOGIN"=>$login
+			$results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :LOGIN", array (":LOGIN"=>$login
 			));
 
 			if (count($results) === 0) {
@@ -21,20 +21,22 @@
 
 			$data = $results[0];
 
-			if (password_verify($password, $data["despassword"] === true) {
+			if (password_verify($password, $data["despassword"]) === true) {
 
 				$user = new User();
 
-				//$user->setiduser($data["iduser"]);
-				//var_dump($user);
-				//exit;
-
+				$user->setiduser($data["iduser"]);
+				
 				$user->setData($data);
 
-				$_SESSION[User::SESSSION] = $user->getData();
+				//var_dump($user);
+				//exit;
+			
+
+				$_SESSION[User::SESSION] = $user->getValues();
 
 				return $user;
-
+				
 			}
 			else {
 
@@ -44,17 +46,23 @@
 
 		}
 
-		public function getValues() {
+		public static function verifyLogin($inadmin = true) {
 
-			return $this->values;
+echo( !isset($_SESSION[User::SESSION])) ;
+				
+echo (!$_SESSION[User::SESSION]);
 
-		}
+echo ((int)$_SESSION[User::SESSION]["iduser"] > 0 );
+ 
+echo ((bool)$_SESSION[User::SESSION]["inadmin"] !== $inadmin);
 
-
-		public static function verifyLogin() {
-
-			if (!isset($_SESSION[USER::SESSION]) || !$_SESSION[USER::SESSION] ||
-				(int)$_SESSION[User::SESSION]["isuser"] > 0 || (bool)$_SESSION[User::SESSION]["inadmin"] !== $inadmin) {
+			if (!isset($_SESSION[User::SESSION]) 
+				|| 
+				!$_SESSION[User::SESSION] 
+				||
+				(int)$_SESSION[User::SESSION]["iduser"] > 0 
+				|| 
+				(bool)$_SESSION[User::SESSION]["inadmin"] !== $inadmin) {
 
 				header("Location: /admin/login");
 				exit;

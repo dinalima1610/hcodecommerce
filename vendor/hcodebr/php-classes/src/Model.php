@@ -10,7 +10,7 @@
 			$method = substr($name, 0, 3);
 			$fieldName = substr($name, 3, strlen($name));
 
-			//var_dump ($method, $name);
+			//var_dump ($method, $fieldName);
 			//exit;
 
 			switch ($method) {
@@ -26,9 +26,9 @@
 			
 		}
 
-		public functin setData($data = array()) {
+		public function setData($data = array()) {
 
-			foreach ($data as $key => $values) {
+			foreach ($data as $key => $value) {
 				$this->{"set" . $key}($value);
 			}
 
@@ -37,5 +37,7 @@
 		public function getValues() {
 			return $this->values;
 		}
+
+
 	}
  ?>		
