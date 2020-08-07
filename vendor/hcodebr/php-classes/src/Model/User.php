@@ -48,19 +48,11 @@
 
 		public static function verifyLogin($inadmin = true) {
 
-echo( !isset($_SESSION[User::SESSION])) ;
-				
-echo (!$_SESSION[User::SESSION]);
-
-echo ((int)$_SESSION[User::SESSION]["iduser"] > 0 );
- 
-echo ((bool)$_SESSION[User::SESSION]["inadmin"] !== $inadmin);
-
 			if (!isset($_SESSION[User::SESSION]) 
 				|| 
 				!$_SESSION[User::SESSION] 
 				||
-				(int)$_SESSION[User::SESSION]["iduser"] > 0 
+				!(int)$_SESSION[User::SESSION]["iduser"] > 0 
 				|| 
 				(bool)$_SESSION[User::SESSION]["inadmin"] !== $inadmin) {
 
